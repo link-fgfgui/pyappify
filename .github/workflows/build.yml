@@ -32,7 +32,7 @@ jobs:
       - name: rust cache
         uses: swatinem/rust-cache@v2
         with:
-          workspaces: './src-tauri -> target'
+          workspaces: "src-tauri"
 
       - name: sync node version
         uses: actions/setup-node@v4
@@ -63,5 +63,7 @@ jobs:
       - name: Update Release Assets
         uses: softprops/action-gh-release@v2.0.5
         with:
-          files: pyappify_dist/*
+          files: |
+            src-tauri/target/release/pyappify.exe
+            src-tauri/target/release/bundle/nsis/*.exe
         if: matrix.platform == 'windows-latest'
